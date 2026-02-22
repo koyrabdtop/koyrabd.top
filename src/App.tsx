@@ -10,6 +10,7 @@ import ServiceMenu from './components/Services/ServiceMenu';
 import ServicePage from './components/Services/ServicePage';
 import WeatherPage from './components/Weather/WeatherPage';
 import HeritagePage from './components/Heritage/HeritagePage';
+import BusPage from './components/Bus/BusPage';
 import AdminDashboard from './components/Admin/AdminDashboard';
 import { services } from './components/Services/serviceData';
 
@@ -93,6 +94,12 @@ export default function App() {
           />
         ) : activeServiceId === 'heritage' ? (
           <HeritagePage 
+            isDarkMode={isDarkMode}
+            onBack={() => setCurrentSection('menu')}
+            toggleDarkMode={toggleDarkMode}
+          />
+        ) : activeServiceId === 'bus' ? (
+          <BusPage 
             isDarkMode={isDarkMode}
             onBack={() => setCurrentSection('menu')}
             toggleDarkMode={toggleDarkMode}

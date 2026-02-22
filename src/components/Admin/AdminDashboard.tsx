@@ -7,6 +7,7 @@ import { motion } from 'motion/react';
 import React, { useState, useEffect, FormEvent } from 'react';
 import { ChevronLeft, Settings, Users, PlusCircle, ShoppingBag, FileText, LayoutDashboard, Moon, Sun, Phone, Landmark, Bus, Smartphone, Scale, HeartPulse, LogOut, Key, CheckCircle2, AlertCircle, ShieldCheck } from 'lucide-react';
 import HotlineAdmin from './Hotline/HotlineAdmin';
+import BusAdmin from './Bus/BusAdmin';
 
 interface AdminDashboardProps {
   onBack: () => void;
@@ -15,7 +16,7 @@ interface AdminDashboardProps {
   toggleDarkMode: () => void;
 }
 
-type AdminView = 'dashboard' | 'data-input' | 'settings' | 'hotline-management';
+type AdminView = 'dashboard' | 'data-input' | 'settings' | 'hotline-management' | 'bus-management';
 
 export default function AdminDashboard({ onBack, onLogout, isDarkMode, toggleDarkMode }: AdminDashboardProps) {
   const [currentView, setCurrentView] = useState<AdminView>('dashboard');
@@ -37,7 +38,7 @@ export default function AdminDashboard({ onBack, onLogout, isDarkMode, toggleDar
 
   const dataInputButtons = [
     { label: 'হটলাইন তথ্য', icon: Phone, color: '#FF3D00', action: () => setCurrentView('hotline-management') },
-    { label: 'বাস তথ্য', icon: Bus, color: '#FF9800' },
+    { label: 'বাস তথ্য', icon: Bus, color: '#FF9800', action: () => setCurrentView('bus-management') },
     { label: 'মোবাইল নাম্বার তথ্য', icon: Smartphone, color: '#9C27B0' },
     { label: 'আইনি সেবা তথ্য', icon: Scale, color: '#3F51B5' },
     { label: 'চিকিৎসা সেবা তথ্য', icon: HeartPulse, color: '#E91E63' },
@@ -114,6 +115,13 @@ export default function AdminDashboard({ onBack, onLogout, isDarkMode, toggleDar
       <div className="p-6 flex-1 space-y-6">
         {currentView === 'hotline-management' && (
           <HotlineAdmin 
+            isDarkMode={isDarkMode} 
+            onBack={() => setCurrentView('data-input')} 
+          />
+        )}
+
+        {currentView === 'bus-management' && (
+          <BusAdmin 
             isDarkMode={isDarkMode} 
             onBack={() => setCurrentView('data-input')} 
           />
